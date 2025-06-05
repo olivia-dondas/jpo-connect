@@ -1,7 +1,5 @@
 # JPO Connect 🚀
 
-_"Je sais que vous êtes là... Je peux sentir votre connexion"_ 😉
-
 👋 **Bonjour ! Ce projet est actuellement en cours d'élaboration.** La structure et les fonctionnalités décrites ci-dessous représentent la trame de base et sont susceptibles d'évoluer. Merci de votre compréhension !
 
 ## Introduction 🎯
