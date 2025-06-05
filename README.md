@@ -1,14 +1,12 @@
 # JPO Connect 🚀
 
-_"Je sais que vous êtes là... Je peux sentir votre connexion"_ 😉
-
 👋 **Bonjour ! Ce projet est actuellement en cours d'élaboration.** La structure et les fonctionnalités décrites ci-dessous représentent la trame de base et sont susceptibles d'évoluer. Merci de votre compréhension !
 
 ## Introduction 🎯
 
 Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour recruter ses futurs étudiants. Comme chaque année, l'équipe marketing utilise la suite Google pour organiser ses journées, ce qui s'avère laborieux...
 
-**JPO Connect** est une plateforme web conçue pour simplifier et centraliser la gestion des inscriptions et l'administration des JPO de La Plateforme. Elle vise à offrir une meilleure expérience tant pour les futurs étudiants et leurs parents que pour l'équipe de recrutement [1].
+**JPO Connect** est une plateforme web conçue pour simplifier et centraliser la gestion des inscriptions et l'administration des JPO de La Plateforme. Elle vise à offrir une meilleure expérience tant pour les futurs étudiants et leurs parents que pour l'équipe de recrutement.
 
 ## Objectifs et Fonctionnalités Principales ✨
 
@@ -20,7 +18,7 @@ Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour r
 - **Pour l'équipe de recrutement (Tableau de Bord Administrateur) :**
   - Gestion complète des JPO : ajout, modification, suppression.
   - Gestion de la capacité d'inscrits par JPO.
-  - Accès à des statistiques 📊 : nombre de visiteurs inscrits, nombre de présents, etc.
+  - Accès à des statistiques 📊 : nombre de visiteurs inscrits, nombre de personnes présentes, etc.
   - Modération des commentaires/avis (répondre, approuver, supprimer).
   - Possibilité de modifier certains contenus du site (sessions à venir, infos pratiques).
   - Gestion des rôles utilisateurs 👥 pour l'équipe marketing (directeur, responsable, salariés) avec des permissions différenciées.
@@ -36,19 +34,32 @@ Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour r
 
 ```
 jpo-connect/
-├── backend/             # Code source PHP (POO, PDO)
-│   ├── api/             # Point d’entrée de l’API (index.php)
-│   ├── classes/         # Contrôleurs, Modèles, autres classes métier
-│   ├── config/          # Fichiers de configuration (database.php)
-│   └── core/            # Classes de base (Router.php, etc.)
-├── frontend/            # Code source ReactJS
-│   ├── public/          # Fichiers statiques
-│   └── src/             # Composants, pages, hooks, etc.
-├── docs/                # Documents de conception (PDF)
+├── backend/                      # Code source PHP (POO, PDO)
+│   ├── api/                      # Point d’entrée de l’API (index.php)
+│   ├── classes/                  # Contrôleurs, Modèles, autres classes métier
+│   │   ├── Controllers/          # Les contrôleurs
+│   │   │   ├── JpoController.php         # Gestion des JPO (list, details, commentaires)
+│   │   │   ├── AuthController.php        # Gestion de l’authentification (login, register)
+│   │   │   ├── UserController.php        # Gestion du profil utilisateur (afficher, modifier, supprimer)
+│   │   │   ├── AdminController.php       # (Si besoin, actions spécifiques admin)
+│   │   │   ├── ModeratorController.php   # (Si besoin, actions spécifiques modérateur)
+│   │   │   └── …
+│   │   ├── Models/              # Les modèles
+│   │   │   ├── Jpo.php
+│   │   │   ├── User.php
+│   │   │   ├── Comment.php             # Pour les commentaires
+│   │   │   ├── Inscription.php         # Pour les inscriptions aux JPO
+│   │   │   └── …
+│   ├── config/                   # Fichiers de configuration (database.php)
+│   └── core/                     # Classes de base (Router.php, etc.)
+├── frontend/                     # Code source ReactJS
+│   ├── public/                   # Fichiers statiques
+│   └── src/                      # Composants, pages, hooks, etc.
+├── docs/                         # Documents de conception (PDF)
 │   ├── wireframes.pdf
 │   ├── maquettes_graphiques.pdf
 │   └── MCD_MLD.pdf
-└── README.md            # Ce fichier
+└── README.md
 ```
 
 ## Prérequis 🛠️
@@ -67,7 +78,7 @@ Vous aurez besoin d'une pile LEMP (Linux, Nginx, MySQL, PHP) fonctionnelle.
 1.  **Cloner le dépôt :**
 
     ```
-    git clone https://github.com/olivia-dondas/jpo-connect.git
+    git clone https://github.com/prenom-nom/jpo-connect.git
     cd jpo-connect
     ```
 
@@ -143,7 +154,7 @@ Tous les documents relatifs à la conception du projet (wireframes, maquettes gr
 
 ## Déploiement 🌐
 
-Le projet final est destiné à être hébergé sur Plesk [1].
+Le projet final est destiné à être hébergé sur Plesk.
 
 ## Présentation et Évaluation 🎤
 
