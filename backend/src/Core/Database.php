@@ -4,26 +4,14 @@ namespace App\Core;
 use PDO;
 use PDOException;
 
-/**
- * Classe de connexion à la base de données utilisant le design pattern Singleton.
- * Cela garantit qu'une seule et unique instance de la connexion PDO est utilisée
- * pour toute la durée de la requête, ce qui est plus efficace.
- */
+
 class Database {
-    /**
-     * @var PDO|null L'unique instance de notre connexion PDO.
-     */
+  
     private static ?PDO $instance = null;
 
-    /**
-     * Le constructeur est privé pour empêcher l'instanciation directe
-     * avec "new Database()".
-     */
     private function __construct() {}
 
-    /**
-     * Empêche le clonage de l'instance pour préserver le Singleton.
-     */
+    
     private function __clone() {}
 
     /**
@@ -40,7 +28,7 @@ class Database {
 
             try {
                 // On crée le DSN (Data Source Name)
-                $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
+                $dsn = "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4";
                 
                 // On crée l'instance de PDO
                 self::$instance = new PDO($dsn, DB_USER, DB_PASS);
@@ -51,10 +39,8 @@ class Database {
                 self::$instance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false); // Utilise de vraies requêtes préparées pour plus de sécurité
 
             } catch (PDOException $e) {
-                // En cas d'échec de la connexion, on arrête l'application et on affiche une erreur générique.
-                // En mode développement, on pourrait afficher $e->getMessage(), mais jamais en production.
                 http_response_code(500);
-                echo json_encode(['error' => 'Database connection failed.']);
+                echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
                 exit();
             }
         }
