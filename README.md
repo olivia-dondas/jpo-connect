@@ -34,32 +34,33 @@ Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour r
 
 ```
 jpo-connect/
-├── backend/                      # Code source PHP (POO, PDO)
-│   ├── api/                      # Point d’entrée de l’API (index.php)
-│   ├── classes/                  # Contrôleurs, Modèles, autres classes métier
-│   │   ├── Controllers/          # Les contrôleurs
-│   │   │   ├── JpoController.php         # Gestion des JPO (list, details, commentaires)
-│   │   │   ├── AuthController.php        # Gestion de l’authentification (login, register)
-│   │   │   ├── UserController.php        # Gestion du profil utilisateur (afficher, modifier, supprimer)
-│   │   │   ├── AdminController.php       # (Si besoin, actions spécifiques admin)
-│   │   │   ├── ModeratorController.php   # (Si besoin, actions spécifiques modérateur)
-│   │   │   └── …
-│   │   ├── Models/              # Les modèles
+├── backend/
+│   ├── src/                      # Code source PHP (PSR-4)
+│   │   ├── Controller/           # Contrôleurs
+│   │   │   ├── JpoController.php
+│   │   │   ├── AuthController.php
+│   │   │   └── ...
+│   │   ├── Model/                # Modèles métier
 │   │   │   ├── Jpo.php
 │   │   │   ├── User.php
-│   │   │   ├── Comment.php             # Pour les commentaires
-│   │   │   ├── Inscription.php         # Pour les inscriptions aux JPO
-│   │   │   └── …
-│   ├── config/                   # Fichiers de configuration (database.php)
-│   └── core/                     # Classes de base (Router.php, etc.)
-├── frontend/                     # Code source ReactJS
-│   ├── public/                   # Fichiers statiques
-│   └── src/                      # Composants, pages, hooks, etc.
-├── docs/                         # Documents de conception (PDF)
-│   ├── wireframes.pdf
-│   ├── maquettes_graphiques.pdf
-│   └── MCD_MLD.pdf
+│   │   │   └── ...
+│   │   ├── Core/                 # Classes fondamentales
+│   │   │   ├── Router.php
+│   │   │   └── Database.php
+│   │   └── Utils/                # Helpers et utilitaires
+│   ├── config/                   # Configuration
+│   │   └── database.php
+│   ├── public/                   # Point d'entrée web
+│   │   ├── index.php             # Front Controller
+│   │   └── .htaccess
+│   ├── tests/                    # Tests unitaires
+│   ├── vendor/                   # Dépendances Composer
+├── frontend/
+│   ├── public/
+│   └── src/
+├── docs/
 └── README.md
+
 ```
 
 ## Prérequis 🛠️
