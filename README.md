@@ -6,7 +6,7 @@
 
 Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour recruter ses futurs étudiants. Comme chaque année, l'équipe marketing utilise la suite Google pour organiser ses journées, ce qui s'avère laborieux...
 
-**JPO Connect** est une plateforme web conçue pour simplifier et centraliser la gestion des inscriptions et l'administration des JPO de La Plateforme. Elle vise à offrir une meilleure expérience tant pour les futurs étudiants et leurs parents que pour l'équipe de recrutement [1].
+**JPO Connect** est une plateforme web conçue pour simplifier et centraliser la gestion des inscriptions et l'administration des JPO de La Plateforme. Elle vise à offrir une meilleure expérience tant pour les futurs étudiants et leurs parents que pour l'équipe de recrutement.
 
 ## Objectifs et Fonctionnalités Principales ✨
 
@@ -18,7 +18,7 @@ Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour r
 - **Pour l'équipe de recrutement (Tableau de Bord Administrateur) :**
   - Gestion complète des JPO : ajout, modification, suppression.
   - Gestion de la capacité d'inscrits par JPO.
-  - Accès à des statistiques 📊 : nombre de visiteurs inscrits, nombre de présents, etc.
+  - Accès à des statistiques 📊 : nombre de visiteurs inscrits, nombre de personnes présentes, etc.
   - Modération des commentaires/avis (répondre, approuver, supprimer).
   - Possibilité de modifier certains contenus du site (sessions à venir, infos pratiques).
   - Gestion des rôles utilisateurs 👥 pour l'équipe marketing (directeur, responsable, salariés) avec des permissions différenciées.
@@ -34,19 +34,33 @@ Chaque année, La Plateforme organise des journées portes ouvertes (JPO) pour r
 
 ```
 jpo-connect/
-├── backend/             # Code source PHP (POO, PDO)
-│   ├── api/             # Point d’entrée de l’API (index.php)
-│   ├── classes/         # Contrôleurs, Modèles, autres classes métier
-│   ├── config/          # Fichiers de configuration (database.php)
-│   └── core/            # Classes de base (Router.php, etc.)
-├── frontend/            # Code source ReactJS
-│   ├── public/          # Fichiers statiques
-│   └── src/             # Composants, pages, hooks, etc.
-├── docs/                # Documents de conception (PDF)
-│   ├── wireframes.pdf
-│   ├── maquettes_graphiques.pdf
-│   └── MCD_MLD.pdf
-└── README.md            # Ce fichier
+├── backend/
+│   ├── src/                      # Code source PHP (PSR-4)
+│   │   ├── Controller/           # Contrôleurs
+│   │   │   ├── JpoController.php
+│   │   │   ├── AuthController.php
+│   │   │   └── ...
+│   │   ├── Model/                # Modèles métier
+│   │   │   ├── Jpo.php
+│   │   │   ├── User.php
+│   │   │   └── ...
+│   │   ├── Core/                 # Classes fondamentales
+│   │   │   ├── Router.php
+│   │   │   └── Database.php
+│   │   └── Utils/                # Helpers et utilitaires
+│   ├── config/                   # Configuration
+│   │   └── database.php
+│   ├── public/                   # Point d'entrée web
+│   │   ├── index.php             # Front Controller
+│   │   └── .htaccess
+│   ├── tests/                    # Tests unitaires
+│   ├── vendor/                   # Dépendances Composer
+├── frontend/
+│   ├── public/
+│   └── src/
+├── docs/
+└── README.md
+
 ```
 
 ## Prérequis 🛠️
@@ -65,7 +79,7 @@ Vous aurez besoin d'une pile LEMP (Linux, Nginx, MySQL, PHP) fonctionnelle.
 1.  **Cloner le dépôt :**
 
     ```
-    git clone https://github.com/olivia-dondas/jpo-connect.git
+    git clone https://github.com/prenom-nom/jpo-connect.git
     cd jpo-connect
     ```
 
@@ -141,7 +155,7 @@ Tous les documents relatifs à la conception du projet (wireframes, maquettes gr
 
 ## Déploiement 🌐
 
-Le projet final est destiné à être hébergé sur Plesk [1].
+Le projet final est destiné à être hébergé sur Plesk.
 
 ## Présentation et Évaluation 🎤
 
