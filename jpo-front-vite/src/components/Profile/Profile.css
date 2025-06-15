@@ -1,0 +1,72 @@
+.profile-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem 2.5rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #0002;
+  text-align: left;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.profile-container h2 {
+  color: #1a237e;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.profile-container h3 {
+  margin-top: 2rem;
+  color: #1a237e;
+  font-size: 1.3rem;
+}
+
+.profile-container div, .profile-container input {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.profile-form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.6rem;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.profile-form button {
+  margin-right: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  background: #1a237e;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile-form button[type="button"] {
+  background: #bdbdbd;
+  color: #222;
+}
+
+.profile-form button:hover {
+  background: #3949ab;
+}
+
+.profile-error {
+  color: #d32f2f;
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .profile-container {
+    padding: 1rem;
+  }
+}

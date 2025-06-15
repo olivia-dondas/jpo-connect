@@ -84,4 +84,15 @@ class Jpo {
         $stmt->execute([$locationId]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+    public function findById($id) {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("
+            SELECT open_days.*, locations.city, locations.address
+            FROM open_days
+            JOIN locations ON open_days.location_id = locations.id
+            WHERE open_days.id = ?
+        ");
+        $stmt->execute([$id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }

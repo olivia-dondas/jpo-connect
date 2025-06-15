@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
+const cityImages = {
+  Marseille: "/images/marseille.jpg",
+  Paris: "/images/paris.jpg",
+  Cannes: "/images/cannes.jpg",
+  Martigues: "/images/martigues.jpg",
+};
+
 export default function City() {
   const { city } = useParams();
   const [jpos, setJpos] = useState([]);
@@ -22,8 +29,24 @@ export default function City() {
       });
   }, [city]);
 
+  const imageSrc = cityImages[city] || "/images/default.jpg";
+
   return (
     <div>
+      <img
+        src={imageSrc}
+        alt={city}
+        style={{
+          width: "100%",
+          maxWidth: 600,
+          height: 200,
+          objectFit: "cover",
+          borderRadius: 12,
+          display: "block",
+          margin: "2rem auto 1rem auto",
+          background: "#eee",
+        }}
+      />
       <h2>JPO à {city.charAt(0).toUpperCase() + city.slice(1)}</h2>
       <ul>
         {jpos.length === 0 && <li>Aucune JPO prévue pour cette ville.</li>}

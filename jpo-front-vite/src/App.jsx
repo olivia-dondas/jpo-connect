@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import JpoDetails from "./pages/JpoDetails/JpoDetails";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Profile from "./pages/Profile";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import Profile from "./components/Profile/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
 import Moderation from "./pages/Moderation";
 import PrivateRoute from "./components/PrivateRoute";
