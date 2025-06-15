@@ -1,0 +1,8 @@
+.banner {
+  background: linear-gradient(90deg, #1a237e 60%, #1976d2 100%);
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  border-radius: 0 0 16px 16px;
+}

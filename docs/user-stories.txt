@@ -1,0 +1,20 @@
+USER STORIES :
+
+Visiteur :
+Consultation du site (home et JPOdetails)Students (user) : 
+- Création de compte (register) et connexion (login)
+- Inscription et désinscription à une JPO (modal depuis JPOdetails)
+- Ajouter un commentaire sous la JPO (JPOdetails)
+- Accès à un profil user (userprofile) avec un récap de détail de l’étudiant ( NOM Prénom, Age, adresse mail, numéro de téléphone, DOB), liste des JPO auxquelles il est inscrit et bouton de suppression de compte définitive.
+
+
+Admin :
+- Accès au gestionnaire (dashboard)
+- Ajouter / modifier et supprimé une JPO (hello le CRUD)
+- Accès à des statistiques 
+- Création compte admin et modérateur
+
+Modérateur: 
+- Consultation des commentaires
+- Suppression de commentaires
+- Possibilité de répondre à des commentaires

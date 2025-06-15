@@ -1,0 +1,25 @@
+.jpo-details {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #0001;
+  padding: 2rem;
+  text-align: left;
+}
+.jpo-details h2 {
+  color: #1a237e;
+}
+.jpo-details button {
+  margin-top: 1.5rem;
+  background: #1a237e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.jpo-details button:hover {
+  background: #1976d2;
+}

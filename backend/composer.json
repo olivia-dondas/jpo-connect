@@ -1,0 +1,15 @@
+{
+    "name": "oliviadondas/jpo-connect",
+    "description": "Application web d'inscription aux Journées Portes Ouvertes de La Plateforme, avec sélection du lieu (Marseille, Martigues, Cannes, Paris).",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Olivia Dondas"
+        }
+    ],
+    "require": {}
+}
