@@ -14,7 +14,8 @@ export default function Profile() {
       setError("Utilisateur non connecté");
       return;
     }
-    fetch(`http://localhost:8000/api/user_profile.php?email=${encodeURIComponent(stored.email)}`)
+    const email = encodeURIComponent(stored.email);
+    fetch(`/api/user_profile.php?email=${email}`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -37,9 +38,9 @@ export default function Profile() {
   const handleSave = async e => {
     e.preventDefault();
     setError("");
-    const res = await fetch("http://localhost:8000/api/update_profile.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+    const res = await fetch('/api/update_profile.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...form, email: user.email }),
     });
     const data = await res.json();

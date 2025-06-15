@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import JpoDetails from "./pages/JpoDetails/JpoDetails";
+import JpoDetails from "./components/JpoDetails/JpoDetails";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";

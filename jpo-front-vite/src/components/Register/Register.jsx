@@ -19,7 +19,7 @@ export default function Register() {
       return;
     }
     try {
-      const res = await fetch("http://localhost:8000/api/register.php", {
+      const res = await fetch("/api/register.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

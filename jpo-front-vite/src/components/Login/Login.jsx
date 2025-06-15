@@ -13,7 +13,7 @@ export default function Login() {
     setError("");
     console.log("Tentative de connexion...");
     try {
-      const res = await fetch("http://localhost:8000/api/login.php", {
+      const res = await fetch("/api/login.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

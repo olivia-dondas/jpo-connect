@@ -16,7 +16,7 @@ export default function JpoDetails() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/jpo.php?id=${id}`)
+    fetch('/api/jpo.php?id=' + id)
       .then((res) => {
         if (!res.ok) throw new Error("Erreur lors du chargement");
         return res.json();
@@ -30,6 +30,29 @@ export default function JpoDetails() {
         setLoading(false);
       });
   }, [id]);
+
+  const handleRegister = () => {
+    const user_id = 1; // Remplacez ceci par l'ID utilisateur réel
+    const jpo_id = id;
+
+    fetch('/api/register_jpo.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_id, jpo_id })
+    })
+      .then(res => res.json())
+      .then(data => {
+        // Affiche un message de succès ou d’erreur selon la réponse
+        if (data.success) {
+          alert("Inscription réussie !");
+        } else {
+          alert("Erreur lors de l'inscription : " + data.message);
+        }
+      })
+      .catch(() => {
+        alert("Erreur réseau lors de l'inscription");
+      });
+  };
 
   if (loading) {
     return (
@@ -78,6 +101,7 @@ export default function JpoDetails() {
           <strong>Capacité :</strong> {jpo.capacity}
         </p>
         <button
+          onClick={handleRegister}
           style={{
             display: "block",
             margin: "2rem auto 0 auto",
