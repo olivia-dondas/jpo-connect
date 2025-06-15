@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 // On importe notre nouveau JpoManager
+
+use App\Models\Jpo;
 use App\Models\JpoManager;
 
 class JpoController {
@@ -122,5 +124,20 @@ class JpoController {
         $jpo->status = $data['status'];
         $result = \App\Models\JpoManager::updateJpo($jpo);
         echo json_encode(['success' => $result]);
+    }
+    
+    /**
+     * Gère la route : GET /api/jpos/city/{city}
+     */
+    public static function getByCity($city): void {
+        header('Content-Type: application/json');
+        if (!$city) {
+            echo json_encode([]);
+            return;
+        }
+        require_once '../Models/Jpo.php';
+        $model = new Jpo();
+        $jpos = $model->findByCity($city);
+        echo json_encode($jpos);
     }
 }

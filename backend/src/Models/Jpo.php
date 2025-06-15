@@ -1,5 +1,6 @@
 <?php
 namespace App\Models;
+use App\Core\Database;
 
 class Jpo {
     public int $id;
@@ -60,6 +61,27 @@ class Jpo {
         $this->created_at = $created_at;
     }
     
-    
-    
+    public function findByCity($city) {
+        $pdo = Database::getConnection(); // <-- utilise getConnection()
+        $stmt = $pdo->prepare("
+            SELECT open_days.*
+            FROM open_days
+            JOIN locations ON open_days.location_id = locations.id
+            WHERE locations.city = ?
+            ORDER BY open_days.event_date DESC
+        ");
+        $stmt->execute([$city]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public function findByLocationId($locationId) {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("
+            SELECT open_days.*
+            FROM open_days
+            WHERE open_days.location_id = ?
+            ORDER BY open_days.event_date DESC
+        ");
+        $stmt->execute([$locationId]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

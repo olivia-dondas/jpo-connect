@@ -48,4 +48,13 @@ class Database {
         // On retourne l'instance (qu'elle vienne d'être créée ou qu'elle existait déjà)
         return self::$instance;
     }
+
+    public static function getInstance(): \PDO {
+        static $pdo = null;
+        if ($pdo === null) {
+            $pdo = new \PDO('mysql:host=localhost;dbname=jpo-connect;charset=utf8', 'root', 'root');
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        }
+        return $pdo;
+    }
 }

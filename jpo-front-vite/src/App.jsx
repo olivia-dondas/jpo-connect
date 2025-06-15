@@ -1,0 +1,61 @@
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import JpoDetails from "./pages/JpoDetails/JpoDetails";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import AdminDashboard from "./pages/AdminDashboard";
+import Moderation from "./pages/Moderation";
+import PrivateRoute from "./components/PrivateRoute";
+import Header from "./components/Header/Header";
+import Banner from "./components/Banner/Banner";
+import Footer from "./components/Footer/Footer";
+import City from "./components/City/City";
+import "./App.css";
+
+function App() {
+  return (
+    <Router>
+      <Header />
+      <Banner />
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/jpo/:id" element={<JpoDetails />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute
+                roles={["student", "employee", "manager", "director"]}
+              >
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute roles={["director"]}>
+                <AdminDashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/moderation"
+            element={
+              <PrivateRoute roles={["manager", "director"]}>
+                <Moderation />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/city/:city" element={<City />} />
+        </Routes>
+      </div>
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;
