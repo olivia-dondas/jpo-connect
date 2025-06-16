@@ -5,7 +5,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
-import Moderation from "./pages/Moderation";
+import ModeratorDashboard from "./components/ModeratorDashboard/ModeratorDashboard";
 import PrivateRoute from "./components/PrivateRoute";
 import Header from "./components/Header/Header";
 import Banner from "./components/Banner/Banner";
@@ -47,7 +47,7 @@ function App() {
             path="/moderation"
             element={
               <PrivateRoute roles={["manager", "director"]}>
-                <Moderation />
+                <ModeratorDashboard />
               </PrivateRoute>
             }
           />
