@@ -14,6 +14,11 @@ export default function JpoDetails() {
   const [jpo, setJpo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [editId, setEditId] = useState(null);
+  const [editContent, setEditContent] = useState("");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     fetch("/api/jpo.php?id=" + id)
@@ -31,8 +36,14 @@ export default function JpoDetails() {
       });
   }, [id]);
 
+  // Charger les commentaires
+  useEffect(() => {
+    fetch(`/api/comments.php?open_day_id=${id}`)
+      .then((res) => res.json())
+      .then(setComments);
+  }, [id]);
+
   const handleRegister = () => {
-    const user = JSON.parse(localStorage.getItem("user"));
     const user_id = user?.id;
     const open_day_id = id;
 
@@ -46,6 +57,72 @@ export default function JpoDetails() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data); // ← Ajoute ceci pour voir la vraie réponse du backend
+      });
+  };
+
+  // Ajouter un commentaire
+  const handleAddComment = (e) => {
+    e.preventDefault();
+    if (!user) return;
+    fetch("/api/add_comment.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user.id,
+        open_day_id: id,
+        content: newComment,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setNewComment("");
+          fetch(`/api/comments.php?open_day_id=${id}`)
+            .then((res) => res.json())
+            .then(setComments);
+        }
+      });
+  };
+
+  // Supprimer un commentaire
+  const handleDeleteComment = (commentId) => {
+    if (!user) return;
+    fetch(`/api/delete_comment.php?id=${commentId}&user_id=${user.id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setComments(comments.filter((c) => c.id !== commentId));
+        }
+      });
+  };
+
+  // Préparer l'édition
+  const handleEditClick = (comment) => {
+    setEditId(comment.id);
+    setEditContent(comment.content);
+  };
+
+  // Valider l'édition
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    fetch("/api/edit_comment.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: editId,
+        user_id: user.id,
+        content: editContent,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setEditId(null);
+          setEditContent("");
+          fetch(`/api/comments.php?open_day_id=${id}`)
+            .then((res) => res.json())
+            .then(setComments);
+        }
       });
   };
 
@@ -111,7 +188,65 @@ export default function JpoDetails() {
         >
           S'inscrire à cette JPO
         </button>
-        {/* Section commentaires à ajouter ici */}
+        <div style={{ marginTop: "2rem" }}>
+          <h3>Commentaires</h3>
+          {user && (
+            <form onSubmit={handleAddComment}>
+              <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Votre commentaire"
+                required
+              />
+              <button type="submit">Envoyer</button>
+            </form>
+          )}
+          <ul>
+            {comments.length === 0 && <li>Aucun commentaire</li>}
+            {comments.map((c) => (
+              <li key={c.id}>
+                <strong>
+                  {c.first_name} {c.last_name}
+                </strong>{" "}
+                :{" "}
+                {editId === c.id ? (
+                  <form
+                    onSubmit={handleEditSubmit}
+                    style={{ display: "inline" }}
+                  >
+                    <input
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      required
+                    />
+                    <button type="submit">Valider</button>
+                    <button type="button" onClick={() => setEditId(null)}>
+                      Annuler
+                    </button>
+                  </form>
+                ) : (
+                  <>
+                    {c.content}
+                    {user && c.user_id === user.id && (
+                      <>
+                        <button onClick={() => handleEditClick(c)}>
+                          Modifier
+                        </button>
+                        <button onClick={() => handleDeleteComment(c.id)}>
+                          Supprimer
+                        </button>
+                      </>
+                    )}
+                  </>
+                )}
+                <span style={{ fontSize: "0.8em", color: "#888" }}>
+                  {" "}
+                  ({c.moderation_status})
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
