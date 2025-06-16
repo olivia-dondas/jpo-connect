@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import JpoDetails from "./pages/JpoDetails/JpoDetails";
+import JpoDetails from "./components/JpoDetails/JpoDetails";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
@@ -12,6 +12,7 @@ import Banner from "./components/Banner/Banner";
 import Footer from "./components/Footer/Footer";
 import City from "./components/City/City";
 import "./App.css";
+import DirectorDashboard from "./components/DirectorDashboard/DirectorDashboard";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             }
           />
           <Route path="/city/:city" element={<City />} />
+          <Route path="/director-dashboard" element={<DirectorDashboard />} />
         </Routes>
       </div>
       <Footer />

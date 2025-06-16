@@ -16,7 +16,7 @@ export default function JpoDetails() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/jpo.php?id=${id}`)
+    fetch("/api/jpo.php?id=" + id)
       .then((res) => {
         if (!res.ok) throw new Error("Erreur lors du chargement");
         return res.json();
@@ -30,6 +30,24 @@ export default function JpoDetails() {
         setLoading(false);
       });
   }, [id]);
+
+  const handleRegister = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const user_id = user?.id;
+    const open_day_id = id;
+
+    console.log("user_id utilisé pour inscription :", user_id);
+
+    fetch("/api/register_jpo.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id, open_day_id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data); // ← Ajoute ceci pour voir la vraie réponse du backend
+      });
+  };
 
   if (loading) {
     return (
@@ -78,6 +96,7 @@ export default function JpoDetails() {
           <strong>Capacité :</strong> {jpo.capacity}
         </p>
         <button
+          onClick={handleRegister}
           style={{
             display: "block",
             margin: "2rem auto 0 auto",

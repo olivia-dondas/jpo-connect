@@ -35,6 +35,9 @@ export default function Header() {
             {(role === "manager" || role === "director") && (
               <Link to="/moderation">Modération</Link>
             )}
+            {user && role === "director" && (
+              <Link to="/director-dashboard">Dashboard</Link>
+            )}
             <button onClick={handleLogout} className="logout-btn">
               Déconnexion
             </button>

@@ -1,0 +1,34 @@
+.director-dashboard {
+  max-width: 1100px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #ccc;
+  padding: 2rem;
+}
+.director-dashboard h2 {
+  text-align: center;
+}
+.director-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+.director-dashboard th, .director-dashboard td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+.director-dashboard th {
+  background: #f0f0f0;
+}
+.director-dashboard button {
+  margin-right: 0.5rem;
+}
+.dashboard-message {
+  color: green;
+  margin-bottom: 1rem;
+}
+.jpo-form input {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}

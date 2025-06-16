@@ -1,26 +1,32 @@
-
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
+header('Content-Type: application/json');
 require_once '/Applications/MAMP/htdocs/jpo-connect/backend/src/Core/Database.php';
 use App\Core\Database;
 
-$pdo = Database::getConnection();
-$data = json_decode(file_get_contents("php://input"), true);
-
-$email = $data["email"] ?? "";
+$data = json_decode(file_get_contents('php://input'), true);
+$user_id = $data['user_id'] ?? null;
+$email = $data['email'] ?? null;
+$name = $data['name'] ?? null;
 $first_name = $data["first_name"] ?? "";
 $last_name = $data["last_name"] ?? "";
 $phone_number = $data["phone_number"] ?? "";
 
-if (!$email) {
+if ($user_id && $email && $name) {
+    $pdo = Database::getConnection();
+    $stmt = $pdo->prepare("UPDATE users SET email = ?, name = ? WHERE id = ?");
+    $success = $stmt->execute([$email, $name, $user_id]);
+    echo json_encode(['success' => $success]);
+    exit;
+} elseif (!$email) {
     echo json_encode(["success" => false, "message" => "Email manquant"]);
     exit;
 }
