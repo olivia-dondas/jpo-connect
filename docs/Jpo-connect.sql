@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : sam. 14 juin 2025 à 22:28
+-- Généré le : dim. 15 juin 2025 à 22:04
 -- Version du serveur : 8.0.40
 -- Version de PHP : 8.3.14
 
@@ -92,10 +92,10 @@ CREATE TABLE `open_days` (
 --
 
 INSERT INTO `open_days` (`id`, `location_id`, `title`, `description`, `event_date`, `capacity`, `status`, `created_at`) VALUES
-(1, 3, 'JPO La Plateforme_ Paris - Printemps 2025', 'Découvrez nos formations dans notre campus parisien.', '2025-03-15 10:00:00', 150, 'completed', '2025-01-15 10:00:00'),
+(1, 3, 'JPO La Plateforme_ Paris - Printemps 2025', 'Découvrez nos formations dans notre campus parisien.', '2025-06-19 10:00:00', 150, 'completed', '2025-01-15 10:00:00'),
 (2, 1, 'JPO La Plateforme_ Cannes - Été 2025', 'Venez nous rencontrer sur la Côte d\'Azur.', '2025-07-12 10:00:00', 200, 'upcoming', '2025-05-20 10:00:00'),
 (3, 2, 'JPO La Plateforme_ Martigues - Rentrée 2025', 'Préparez votre avenir à Martigues.', '2025-09-06 10:00:00', 120, 'upcoming', '2025-06-01 14:00:00'),
-(4, 3, 'Session d\'information spéciale IA - Paris', 'Une session annulée pour tester l\'affichage.', '2025-04-20 14:00:00', 50, 'cancelled', '2025-03-10 08:00:00'),
+(4, 3, 'Session d\'information spéciale IA - Paris', 'Une session annulée pour tester l\'affichage.', '2025-04-20 14:00:00', 50, 'upcoming', '2025-03-10 08:00:00'),
 (5, 4, 'Grande JPO de rentrée - Marseille', 'Le campus historique vous ouvre ses portes !', '2025-09-13 10:00:00', 300, 'upcoming', '2025-06-15 08:00:00');
 
 -- --------------------------------------------------------
@@ -122,7 +122,8 @@ INSERT INTO `registrations` (`user_id`, `open_day_id`, `registration_date`, `att
 (5, 1, '2025-03-03 10:30:00', 'attended'),
 (5, 2, '2025-06-08 13:00:00', 'registered'),
 (6, 1, '2025-03-06 17:10:00', 'absent'),
-(6, 5, '2025-07-02 14:30:00', 'registered');
+(6, 5, '2025-07-02 14:30:00', 'registered'),
+(9, 3, '2025-06-15 15:19:53', 'registered');
 
 -- --------------------------------------------------------
 
@@ -153,7 +154,10 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password_hash`, 
 (3, 'Pierre', 'Martin', 'salarie@laplateforme.io', '$2y$10$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '0345678901', 'employee', NULL, NULL, '2024-02-01 08:15:00'),
 (4, 'Alice', 'Dubois', 'alice.d@email.com', '$2y$10$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '0611223344', 'student', NULL, NULL, '2025-03-01 13:00:00'),
 (5, 'Bob', 'Lemoine', 'bob.l@email.com', '$2y$10$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '0655667788', 'student', NULL, NULL, '2025-03-02 10:00:00'),
-(6, 'Chloé', 'Petit', 'chloe.p@email.com', '$2y$10$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '0699887766', 'student', NULL, NULL, '2025-03-05 17:00:00');
+(6, 'Chloé', 'Petit', 'chloe.p@email.com', '$2y$10$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '0699887766', 'student', NULL, NULL, '2025-03-05 17:00:00'),
+(9, 'Olivia', 'Dondas', 'olivia.dondas@gmail.com', '$2y$12$kEYQwyoztSIFjGdyNhYbpenPVNtZ0A5XH.Vcsi0EY9/C8GjE5SHDy', '0652089771', 'student', NULL, NULL, '2025-06-15 14:35:38'),
+(10, 'Oli', 'Oli', 'oli@oli.com', '$2y$12$F1jlhEGMQEKY3YMSjPkL/u2GAweSiNZ80vwbvw1tBQnrpVLRVt9Qu', '', 'director', NULL, NULL, '2025-06-15 15:31:14'),
+(12, 'Oliviavia', 'Dondas', 'dondas@gmail.com', '$2y$10$prWlQ12uODbXOGCKu2J/lOYvuJGe5B0zKYUDCgDT6NthF2d7uAcnS', '', 'student', NULL, NULL, '2025-06-15 20:10:15');
 
 --
 -- Index pour les tables déchargées
@@ -225,7 +229,7 @@ ALTER TABLE `open_days`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées

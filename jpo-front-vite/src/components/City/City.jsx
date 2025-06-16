@@ -14,13 +14,13 @@ export default function City() {
 
   useEffect(() => {
     // 1. Récupérer l'id du lieu
-    fetch(`http://localhost:8000/api/location.php?city=${city}`)
+    fetch("/api/location.php?city=" + city)
       .then((res) => res.json())
       .then((locations) => {
         if (locations.length > 0) {
           const locationId = locations[0].id;
           // 2. Récupérer les JPO pour cet id
-          fetch(`http://localhost:8000/api/jpos.php?location_id=${locationId}`)
+          fetch(`/api/jpos.php?location_id=${locationId}`)
             .then((res) => res.json())
             .then((data) => setJpos(Array.isArray(data) ? data : []));
         } else {
