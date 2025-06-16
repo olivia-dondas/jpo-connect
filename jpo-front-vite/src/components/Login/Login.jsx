@@ -19,13 +19,20 @@ export default function Login() {
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (data.success) {
-        // Stocke l'utilisateur et le token
+
+      if (data.success && data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("token", data.token);
-        navigate("/profile");
+        if (data.user.role === "director") {
+          navigate("/director-dashboard");
+        } else if (data.user.role === "student") {
+          navigate("/profile");
+        } else if (data.user.role === "admin") {
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/"); // ou la page d'accueil ou profil
+        }
       } else {
-        setError(data.message || "Identifiants invalides");
+        setError(data.error || "Erreur de connexion");
       }
     } catch {
       setError("Erreur de connexion au serveur");

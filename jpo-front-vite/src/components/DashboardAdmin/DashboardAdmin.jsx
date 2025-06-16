@@ -6,6 +6,7 @@ export default function DashboardAdmin() {
 
   // Exemple : récupération du user connecté
   const user = JSON.parse(localStorage.getItem("user"));
+  const role = user?.role;
 
   // Si pas connecté ou pas director, on bloque l'accès
   if (!user || user.role !== "director") {

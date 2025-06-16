@@ -30,10 +30,10 @@ if ($user && password_verify($password, $user["password_hash"])) {
     echo json_encode([
         "success" => true,
         "user" => [
+            "id" => $user["id"],
             "email" => $user["email"],
             "role" => $user["role"]
-        ],
-        "token" => "demo-token-123"
+        ]
     ]);
 } else {
     echo json_encode([

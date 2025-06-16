@@ -3,18 +3,27 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [form, setForm] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
-    if (password !== confirm) {
+    if (form.password !== form.confirm_password) {
       setError("Les mots de passe ne correspondent pas.");
       return;
     }
@@ -22,21 +31,23 @@ export default function Register() {
       const res = await fetch("/api/register.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({
+          first_name: form.first_name,
+          last_name: form.last_name,
+          email: form.email,
+          password: form.password,
+        }),
       });
 
-      // Ajoute ce log pour voir la réponse brute
       const text = await res.text();
       console.log("Réponse brute:", text);
-
-      // Essaie de parser le JSON
       const data = JSON.parse(text);
 
       if (data.success) {
         setSuccess("Inscription réussie ! Vous pouvez vous connecter.");
         setTimeout(() => navigate("/login"), 1500);
       } else {
-        setError(data.message || "Erreur lors de l'inscription.");
+        setError(data.error || "Erreur lors de l'inscription.");
       }
     } catch (err) {
       setError("Erreur de connexion au serveur.");
@@ -48,25 +59,45 @@ export default function Register() {
       <h2>Inscription</h2>
       <form onSubmit={handleSubmit}>
         <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="first_name"
+          placeholder="Prénom"
+          value={form.first_name}
+          onChange={handleChange}
           required
+          autoComplete="given-name"
         />
         <input
+          name="last_name"
+          placeholder="Nom"
+          value={form.last_name}
+          onChange={handleChange}
+          required
+          autoComplete="family-name"
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          required
+          autoComplete="username"
+        />
+        <input
+          name="password"
           type="password"
           placeholder="Mot de passe"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
+          value={form.password}
+          onChange={handleChange}
           required
           autoComplete="new-password"
         />
         <input
+          name="confirm_password"
           type="password"
           placeholder="Confirmer le mot de passe"
-          value={confirm}
-          onChange={e => setConfirm(e.target.value)}
+          value={form.confirm_password}
+          onChange={handleChange}
           required
           autoComplete="new-password"
         />

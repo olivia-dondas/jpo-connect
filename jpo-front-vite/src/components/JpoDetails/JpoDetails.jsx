@@ -16,7 +16,7 @@ export default function JpoDetails() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch('/api/jpo.php?id=' + id)
+    fetch("/api/jpo.php?id=" + id)
       .then((res) => {
         if (!res.ok) throw new Error("Erreur lors du chargement");
         return res.json();
@@ -32,25 +32,20 @@ export default function JpoDetails() {
   }, [id]);
 
   const handleRegister = () => {
-    const user_id = 1; // Remplacez ceci par l'ID utilisateur réel
-    const jpo_id = id;
+    const user = JSON.parse(localStorage.getItem("user"));
+    const user_id = user?.id;
+    const open_day_id = id;
 
-    fetch('/api/register_jpo.php', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id, jpo_id })
+    console.log("user_id utilisé pour inscription :", user_id);
+
+    fetch("/api/register_jpo.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id, open_day_id }),
     })
-      .then(res => res.json())
-      .then(data => {
-        // Affiche un message de succès ou d’erreur selon la réponse
-        if (data.success) {
-          alert("Inscription réussie !");
-        } else {
-          alert("Erreur lors de l'inscription : " + data.message);
-        }
-      })
-      .catch(() => {
-        alert("Erreur réseau lors de l'inscription");
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data); // ← Ajoute ceci pour voir la vraie réponse du backend
       });
   };
 

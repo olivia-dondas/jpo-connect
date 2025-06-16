@@ -12,6 +12,7 @@ import Banner from "./components/Banner/Banner";
 import Footer from "./components/Footer/Footer";
 import City from "./components/City/City";
 import "./App.css";
+import DirectorDashboard from "./components/DirectorDashboard/DirectorDashboard";
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             }
           />
           <Route path="/city/:city" element={<City />} />
+          <Route path="/director-dashboard" element={<DirectorDashboard />} />
         </Routes>
       </div>
       <Footer />
